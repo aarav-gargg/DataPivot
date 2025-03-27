@@ -1,5 +1,8 @@
 .query-selector {
     margin-bottom: 20px;
+    display : flex;
+    align-items : center;
+    justify-content: center;
   }
   
   .query-selector select {
@@ -14,5 +17,10 @@
   
   .query-selector select:hover {
     background-color: #e2e6ea;
+  }
+
+  .type-options{
+    display: flex;
+    gap:5px
   }
   

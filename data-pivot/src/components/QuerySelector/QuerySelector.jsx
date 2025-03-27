@@ -4,6 +4,7 @@ import './QuerySelector.css'
 const QuerySelector = ({ queryType, setQueryType, selectedQuery, setSelectedQuery, predefinedQueries }) => {
   return (
     <div className="query-selector">
+      <div className="type-options">
       <label>
         <input
           type="radio"
@@ -24,6 +25,18 @@ const QuerySelector = ({ queryType, setQueryType, selectedQuery, setSelectedQuer
         />
         Custom Query
       </label>
+
+      <label>
+        <input
+          type="radio"
+          name="queryType"
+          value="insert"
+          checked={queryType === "insert"}
+          onChange={() => setQueryType("insert")}
+        />
+        Insert Query
+      </label>
+      </div>
 
       {queryType === "predefined" && (
         <select value={selectedQuery} onChange={(e) => setSelectedQuery(e.target.value)}>

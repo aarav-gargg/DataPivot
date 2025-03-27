@@ -40,7 +40,7 @@
     background-color: #e0e0e0;
     font-weight: bold;
     text-transform: capitalize;
-    cursor: pointer; /* Indicating sort functionality */
+    cursor: pointer; 
   }
   
   .sort-btn {
@@ -56,4 +56,30 @@
   .sort-btn:hover {
     background-color: #0056b3;
   }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .page-btn {
+    border: none;
+    background-color: #ddd;
+    padding: 5px 10px;
+    margin: 4px 5px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .page-btn.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .page-btn:hover {
+    background-color: #0056b3;
+    color: white;
+  }
+  
   

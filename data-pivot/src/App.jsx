@@ -5,6 +5,8 @@ import QueryEditor from "./components/QueryEditor/QueryEditor";
 import ThemeToggle from "./components/ThemeToggle";
 import "./App.css";
 import { predefinedDataSets, predefinedQueries, customQueryData } from "./helpers/Query";
+import QueryHistory from "./components/QueryHistory/QueryHistory";
+import InsertDataForm from "./components/InertTable/InsertDataForm";
 
 
 const App = () => {
@@ -13,6 +15,8 @@ const App = () => {
   const [customQuery, setCustomQuery] = useState("");
   const [queryResult, setQueryResult] = useState(predefinedDataSets[selectedQuery]);
   const [queryHistory, setQueryHistory] = useState([]);
+  
+
 
 
   useEffect(() => {
@@ -30,10 +34,12 @@ const App = () => {
     }
     setQueryResult(result);
 
-
-    const newHistory = [queryType === "predefined" ? selectedQuery : customQuery, ...queryHistory.slice(0, 4)];
-    setQueryHistory(newHistory);
-    localStorage.setItem("queryHistory", JSON.stringify(newHistory));
+    const newQuery = queryType === "predefined" ? selectedQuery : customQuery;
+    if (queryHistory.length === 0 || newQuery !== queryHistory[0]) {
+      const newHistory = [newQuery, ...queryHistory.slice(0, 50)];
+      setQueryHistory(newHistory);
+      localStorage.setItem("queryHistory", JSON.stringify(newHistory));
+    }
   };
 
   const runQueryFromHistory = (query) => {
@@ -49,15 +55,17 @@ const App = () => {
     console.log("result", result)
 
     setQueryResult(result);
-    const newHistory = [query, ...queryHistory.slice(0, 4)];
-    setQueryHistory(newHistory);
-    localStorage.setItem("queryHistory", JSON.stringify(newHistory));
+    if (query !== queryHistory[0]) {
+      const newHistory = [query, ...queryHistory.slice(0, 50)];
+      setQueryHistory(newHistory);
+      localStorage.setItem("queryHistory", JSON.stringify(newHistory));
+    }
   }
 
   const copyToQueryEditor = (query) => {
     setQueryType("custom");
     setCustomQuery(query);
-    scrollTo(0,0)
+    scrollTo(0, 0)
   }
 
   const copyQueryToClipboard = () => {
@@ -90,6 +98,8 @@ const App = () => {
         </div>
       )}
 
+      {queryType === "insert" && (<InsertDataForm columns={["ID", "Name", "Age", "City"]} />)}
+
       {queryType === "custom" ? null : (
         <button onClick={runQuery} className="run-btn">Run</button>
       )}
@@ -100,24 +110,8 @@ const App = () => {
       <Table data={queryResult} />
 
 
-      {queryHistory.length > 0 && (
-        <div className="query-history">
-          <h3>Query History</h3>
-          <ul>
-            {queryHistory.map((query, index) => (
-              <li key={index}>
-                <div className="execute-history">
-                  {query}
-                  <div>
-                    <button className="history-button" onClick={() => runQueryFromHistory(query)}>Execute Query</button>
-                    <button className="copy-custom-button" onClick={() => copyToQueryEditor(query)}>Copy to Custom</button>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <QueryHistory copyToQueryEditor={copyToQueryEditor} runQueryFromHistory={runQueryFromHistory} queryHistory={queryHistory} />
+
     </div>
   );
 };

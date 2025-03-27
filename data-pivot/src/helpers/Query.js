@@ -69,13 +69,13 @@ export const predefinedDataSets = {
   ],
 };
 
-export const customQueryData = [
-  { studentID: 1, studentName: "Aarav Garg", grade: "10", age: 15, city: "Delhi" },
-  { studentID: 2, studentName: "Sanya Mehta", grade: "9", age: 14, city: "Mumbai" },
-  { studentID: 3, studentName: "Rohan Verma", grade: "11", age: 16, city: "Bangalore" },
-  { studentID: 4, studentName: "Ishita Sharma", grade: "12", age: 17, city: "Kolkata" },
-  { studentID: 5, studentName: "Neel Kapoor", grade: "10", age: 15, city: "Chennai" },
-];
+export const customQueryData = Array.from({ length: 500 }, (_, i) => ({
+  studentID: i + 1,
+  studentName: `Student ${i + 1}`,
+  grade: (9 + (i % 4)).toString(), 
+  age: 14 + (i % 4), 
+  city: ["Delhi", "Mumbai", "Bangalore", "Kolkata", "Chennai", "Hyderabad", "Pune"][i % 7]
+}));
 
 
 
