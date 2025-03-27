@@ -1,0 +1,18 @@
+.query-selector {
+    margin-bottom: 20px;
+  }
+  
+  .query-selector select {
+    margin-left: 15px;
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid #ccc;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .query-selector select:hover {
+    background-color: #e2e6ea;
+  }
+  

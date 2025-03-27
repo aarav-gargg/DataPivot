@@ -1,0 +1,24 @@
+.query-editor {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: "Courier New", monospace;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #1e1e1e; 
+}
+
+.query-editor .run-btn {
+  margin-top: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.query-editor .run-btn:hover {
+  background-color: #0056b3;
+}
