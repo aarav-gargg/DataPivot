@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import "../../App.css"
+import "./QueryHistory.css"
 
 const QueryHistory = ({ queryHistory, runQueryFromHistory, copyToQueryEditor }) => {
 
@@ -45,6 +45,8 @@ const QueryHistory = ({ queryHistory, runQueryFromHistory, copyToQueryEditor }) 
                     </ul>
                 </div>
             )}
+            
+            {paginatedData.length == 0 && (<div className='no-history'> No history to display. </div>)}
 
             <div className="pagination">
                 <button
