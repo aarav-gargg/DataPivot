@@ -14,10 +14,7 @@ const App = () => {
   const [selectedQuery, setSelectedQuery] = useState(predefinedQueries[0]);
   const [customQuery, setCustomQuery] = useState("");
   const [queryResult, setQueryResult] = useState(predefinedDataSets[selectedQuery]);
-  const [queryHistory, setQueryHistory] = useState([]);
-  
-
-
+  const [queryHistory, setQueryHistory] = useState([]); 
 
   useEffect(() => {
     const history = JSON.parse(localStorage.getItem("queryHistory")) || [];
