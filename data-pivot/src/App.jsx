@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Table from "./components/Table/Table";
 import QuerySelector from "./components/QuerySelector/QuerySelector";
 import QueryEditor from "./components/QueryEditor/QueryEditor";
-import ThemeToggle from "./components/ThemeToggle";
+
 import "./App.css";
 import { predefinedDataSets, predefinedQueries, customQueryData } from "./helpers/Query";
 import QueryHistory from "./components/QueryHistory/QueryHistory";
@@ -81,7 +81,6 @@ const App = () => {
 
   return (
     <div className="app">
-      <ThemeToggle />
       <QuerySelector
         queryType={queryType}
         setQueryType={setQueryType}

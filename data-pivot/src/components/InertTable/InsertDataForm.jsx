@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import "./InsertDataForm.css";
 
-const InsertDataForm = ({ columns }) => {
+const tableOptions = {
+  Users: ["ID", "Name", "Email"],
+  Orders: ["OrderID", "Product", "Quantity"],
+  Products: ["ProductID", "ProductName", "Price"],
+};
+
+const InsertDataForm = () => {
+  const [selectedTable, setSelectedTable] = useState("Users");
   const [rows, setRows] = useState([{ id: Date.now(), values: {} }]);
+
+  const columns = tableOptions[selectedTable];
 
   const handleInputChange = (rowIndex, column, value) => {
     const newRows = [...rows];
@@ -20,18 +29,39 @@ const InsertDataForm = ({ columns }) => {
   };
 
   const handleInsertData = () => {
-    console.log("Inserted Data:", rows);
-    alert("Data Inserted Successfully!");
-    setRows([{ id: Date.now(), values: {} }]); 
+    console.log(`Inserted Data into ${selectedTable}:`, rows);
+    alert(`Data inserted into ${selectedTable} successfully!`);
+    setRows([{ id: Date.now(), values: {} }]);
   };
 
   return (
     <div className="insert-table">
       <h2>Insert Data</h2>
+
+      <div className="table-options">
+        <label>Select Table:</label>
+        <select
+          className="table-select"
+          value={selectedTable}
+          onChange={(e) => {
+            setSelectedTable(e.target.value);
+            setRows([{ id: Date.now(), values: {} }]);
+          }}
+        >
+          {Object.keys(tableOptions).map((table) => (
+            <option key={table} value={table}>
+              {table}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className="table">
         <div className="table-header">
           {columns.map((col, index) => (
-            <div key={index} className="table-cell header-cell">{col}</div>
+            <div key={index} className="table-cell header-cell">
+              {col}
+            </div>
           ))}
           <div className="table-cell header-cell">Actions</div>
         </div>
@@ -48,13 +78,19 @@ const InsertDataForm = ({ columns }) => {
                 onChange={(e) => handleInputChange(rowIndex, col, e.target.value)}
               />
             ))}
-            <button className="remove-btn" onClick={() => handleRemoveRow(rowIndex)}>❌</button>
+            <button className="remove-btn" onClick={() => handleRemoveRow(rowIndex)}>
+              Remove
+            </button>
           </div>
         ))}
       </div>
 
-      <button className="add-btn" onClick={handleAddRow}>➕ Add Row</button>
-      <button className="insert-btn" onClick={handleInsertData}>📥 Insert Data</button>
+      <button className="add-btn" onClick={handleAddRow}>
+        Add Row
+      </button>
+      <button className="insert-btn" onClick={handleInsertData}>
+        Insert Data
+      </button>
     </div>
   );
 };

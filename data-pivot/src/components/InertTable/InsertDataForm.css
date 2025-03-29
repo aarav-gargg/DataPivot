@@ -12,6 +12,20 @@
     padding: 10px;
     border-radius: 5px;
   }
+
+  .table-options{
+    display : flex;
+    align-items : center;
+    justify-content: center;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+
+  .table-select{
+    padding: 3px;
+    font-size: medium;
+    margin-left: 4px;
+  }
   
   .table-header, .table-row {
     display: flex;
